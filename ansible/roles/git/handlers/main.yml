@@ -1,0 +1,4 @@
+- name: restart apache
+  ansible.builtin.service:
+    name: pkgname
+    state: restarted

@@ -1,0 +1,6 @@
+- name: install apache
+  apt:
+      name: 
+        - "{{pkgname}}"
+      update_cache: yes
+      state: latest

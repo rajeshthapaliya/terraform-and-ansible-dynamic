@@ -1,0 +1,41 @@
+- name: Install Git
+  apt:
+      name: git
+      state: present
+
+- name: Remove existing directory
+  file:
+       path: /var/www/html/
+       state: absent
+
+- name: Clone repository
+  git:
+      repo: https://github.com/rajeshthapaliya/todo_list_app.git
+      dest: /var/www/html/
+
+- name: Creating .env file
+  file:
+      path: "/var/www/html/.env"
+      state: touch    
+
+- name: Copy GitLab configuration file.
+  template:
+    src: "main.j2"
+    dest: /var/www/html/.env   
+
+- name: Run npm install and restart apache
+  command: npm install
+  args:
+    chdir: /var/www/html/
+  notify: restart apache
+
+
+- name: npm global version
+  shell: npm install -g n && n 14
+  args:
+    creates: /var/local/bin/node14
+
+- name: Running
+  command: node server.js
+  args:
+    chdir: /var/www/html/     

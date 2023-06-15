@@ -1,0 +1,9 @@
+---
+- hosts : abcinstance
+  become : true
+  gather_facts: true
+  roles:
+    - apache
+    - node-js-and-npm
+    - git
+

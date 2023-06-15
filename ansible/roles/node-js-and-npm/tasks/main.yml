@@ -1,0 +1,18 @@
+- name: Install Node.js and npm dependencies
+  package:
+          name:
+            - curl 
+            # Curl (stands for "Client URL") is a command-line tool and library for making HTTP requests to various types of servers.
+          state: present
+
+- name: Install npm
+  package:
+          name: npm
+          update_cache: yes
+          state: present
+
+- name: Install Node.js
+  package:
+          name: nodejs
+          update_cache: yes
+          state: present
